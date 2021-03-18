@@ -1,0 +1,48 @@
+{% extends 'sam/base.html' %}
+{% block title %}Sign up{% endblock title %}
+
+
+{% block content %}
+<style>
+ .class{
+    border: solid green 3px;
+    padding:30px;
+    margin:40px;
+ }
+
+ #button{
+     background-color: black;
+     color:red;
+
+ }
+ h3{
+     text-decoration:underline;
+     font-size:30px;
+     text-align:center;
+ }
+
+ .p{
+     text-align: center;
+      text-decoration:underline;
+ }
+
+ .sucess{
+     color:green
+ }
+
+</style>
+
+<form action="{% url 'app:register' %}" method="POST">
+<div class="class">
+<h3> Signup</h3>
+             <p classs= sucess>sucessfullyregister!</p>
+  
+       {% csrf_token %}
+       {{form.as_p}}
+
+      <input type="submit"  value=register>
+       </form>
+        <p class = p>Already registerted?<a href={% url 'app:login' %}>login</a></p>
+</div>
+{% endblock  %}
+       

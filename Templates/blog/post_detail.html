@@ -1,0 +1,45 @@
+{% extends 'sam/base.html' %} {% block content %}
+<style>
+    .p {
+        border: solid green 2px;
+        border-radius: 5px;
+        margin: 80px;
+        padding: 50px;
+        background-color: rgb(173, 169, 169);
+    }
+</style>
+<div class=p>
+    <h3>Title</h3>
+    {% if not object.published_date %}
+
+    <a href="{% url 'app:publish' object.id %}">
+        <h2>publish</h2>
+    </a>
+
+    {% endif%}
+    <h1>{{object.title}}</h1>
+    <br>
+    <br> {{object.text}}
+    <h3>---------------------------------------------------------------------------------</h3>
+    {% if  request.session.user_login %}
+    <a href="{% url 'app:update' object.id %}"><h2>update</h2>
+    </a>
+    <a href="{% url 'app:delete' object.id %}"><h2>delete</h2>
+    </a>
+    {% else %}
+    <a href="{% url 'app:add_comment' object.id %}"><h2>Add comment</h2>
+    </a>
+
+     {% endif%}
+
+    {% for comment in object.comments.all %}
+    <h3>{{comment.author}}</h3>
+    <p>{{comment.text}}</p>
+
+    {% empty %}
+    <h4>"No comments Posted "</h4>
+
+    {% endfor %}
+
+</div>
+{% endblock %}

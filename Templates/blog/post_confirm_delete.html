@@ -1,0 +1,12 @@
+  {% extends 'sam/base.html' %}
+ {% block titlle %} delete post{% endblock titlle %}  
+
+  {% block content %}
+
+  
+    <form method="post">
+        {% csrf_token %}
+        <p> Are u sure you want to delete"{{object.title}}"?</p>
+        <input type="submit" value="confirm">
+    </form>
+{% endblock  %}

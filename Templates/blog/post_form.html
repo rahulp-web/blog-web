@@ -1,0 +1,17 @@
+{% extends 'sam/base.html' %} 
+{% block content %}
+<style>
+        #form {
+        border: 2px solid green;
+        padding: 50px;
+        background-color: rgb(173, 169, 169);
+        margin-right: 500px;
+        margin-left: 500px;
+</style>
+<form method="POST" id="form">
+
+    {% csrf_token %} {{form.as_p}}
+
+    <input type="submit" value="post">
+</form>
+{% endblock %}

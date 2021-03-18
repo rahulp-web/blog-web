@@ -1,0 +1,41 @@
+{% extends 'sam/base.html' %} {% block title %}Sign up{% endblock title %} {% block content %}
+<style>
+    .class {
+        border: solid green 3px;
+        padding: 80px;
+        margin: 40px;
+        background-color: rgb(173, 169, 169);
+    }
+    
+    #button {
+        background-color: black;
+        color: red;
+    }
+    
+    h3 {
+        text-decoration: underline;
+        font-size: 30px;
+        text-align: center;
+    }
+    
+    .p {
+        text-align: center;
+        text-decoration: underline;
+    }
+    
+    input[type='submit'] {
+        background-color: rgb(122, 177, 122);
+    }
+</style>
+
+<form action="{% url 'app:register' %}" method="POST">
+    <div class="class">
+        <h3> Signup</h3>
+
+        {% csrf_token %} {{form.as_p}}
+
+        <input type="submit" value=register>
+</form>
+<p class=p>Already registerted?<a href={% url 'app:login' %}>login</a></p>
+</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'sam/base.html' %}
+
+
+{% block content  %}
+
+    <form action="{% url 'app:otp' %}" method="POST">
+
+        {% csrf_token %}
+        <label for="otp">enter  otp</label>
+        <input type="text" id="otp" name="conf_otp">
+        <input type="hidden" name="otp" value={{otp}}>
+       <input type="submit" name="sub" value= submit>
+    </form>
+{% endblock  %}

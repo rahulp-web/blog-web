@@ -1,0 +1,25 @@
+{% extends 'sam/base.html' %}
+
+{% block title %}{{user.get_username}}(profile){% endblock title %}
+
+{% block content %}
+<style>
+.add{
+    border:solid green 3px;
+    padding: 50px;
+    margin: 100px;
+}
+
+
+</style>
+
+
+
+<div class=add>
+     <form action={% url 'app:profile' %} method="POST" enctype="multipart/form-data">
+         {% csrf_token %}
+         {{form.as_p}}
+         <input type="submit"  value="submit">
+    </form>
+</div>
+{% endblock  %}

@@ -1,0 +1,17 @@
+{% extends 'sam/base.html' %} {% block content %}
+<style>
+    #j{
+        border: 2px solid green;
+        padding: 50px;
+        margin-right: 500px;
+        margin-left: 500px;
+        background-color: rgb(173, 169, 169);
+    }
+</style>
+<form action="{% url 'app:add_comment' pk %}" method="POST"id='j'>
+    {% csrf_token %} {{form.as_p}}
+    <input type="submit" value="post comment">
+
+
+</form>
+{% endblock %}

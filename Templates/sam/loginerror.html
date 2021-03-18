@@ -1,0 +1,56 @@
+{% extends 'sam/base.html' %} {% block title %}login{% endblock title %} {% block content %}
+<style>
+    .user {
+        border: solid green 3px;
+        padding: 100px;
+        margin: 50px;
+        background-color: rgb(173, 169, 169);
+    }
+    
+    input[type=username],
+    input[type=password] {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    
+    input[type=submit] {
+        width: 25%;
+        background-color: lightgreen;
+        margin: 10px;
+        padding: 5px;
+    }
+    
+    h3 {
+        text-decoration: underline;
+        text-align: center;
+        font-size: 30px;
+    }
+    
+    .r {
+        text-align: center;
+        text-decoration: underline;
+    }
+    
+    .h {
+        color: red;
+    }
+</style>
+
+<div class="user">
+    <h3>Login</h3>
+    <h4 class=h>incorrect username or password</h4>
+    <form action="{% url 'app:login' %}" method="POST">
+        {% csrf_token %} username:
+        <input type="username" id="name" name="username">
+        </br>
+        password:<input type="password" id="pass" name="password">
+        </br>
+        <input type="submit" value="Login" ogin>
+    </form>
+
+    <p class=r>Createaccount?<a href={% url 'app:register' %}>register</a></p>
+
+</div>
+{% endblock content %}
