@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.urls import path,include
 from blog import views
+from django.conf import settings
+
 
 app_name = "app"
 
@@ -25,7 +27,6 @@ urlpatterns = [
     path('login/',views.user_login,name="login"),
     path('logout/',views.user_logout,name="logout"),
 
-    path('addprofile/',views.user_profile,name="profile"),
     path('new_post/',views.PostCreateView.as_view(), name='create_post'),
     path('new_post/<int:pk>/',views.PostDetailView.as_view(), name='post_detail'),
     path('post/drafts/',views.DarftListView.as_view(), name= 'post_draft'),
@@ -33,5 +34,7 @@ urlpatterns = [
     path('publish/<int:pk>', views.post_publish, name= 'publish'),
     path('update/<int:pk>', views.PostUpdateView.as_view(), name= 'update'),
     path('delete/<int:pk>', views.PostDeleteView.as_view(), name= 'delete'),
-    path('add_comment/<int:pk>', views.addcomment, name= 'add_comment'),
+    path('comments/<int:pk>', views.addcomment, name = 'add_comment'),
+    
+
 ]

@@ -2,51 +2,72 @@
 <style>
     .p {
         border: solid green 2px;
-        border-radius: 5px;
+        border-radius: 9px;
         margin: 80px;
         padding: 50px;
-        background-color: rgb(197, 188, 188);
+        background-color: e6e6e6;
     }
 </style>
 
 <div class=p>
-    {% for object in object_list%}
-
-    <a href="{% url 'app:post_detail' object.id %}">
-        <h1>{{object.title}}</h1>
-    </a>
-    <br>
-        <strong>{{object.author}}:</strong>
-        <br>
-        <h2>{{object.text}}</h2>
-        <br>
-        <h3>----------------------------------------------------------------------------</h3>
- 
-    {% endfor %}
+     {% for object in object_list %}
+        <h2><a href="{% url 'app:post_detail' object.id %}"> {{object.title}} </a></h2>
+        <h3>{{object.author.username}}</h3>
+        <h3>--------------------------------------------------------</h3>
+     {% endfor %}
 </div>
-
-
-
-<h1>{{work}}</h1>
-{% if is_paginated %}
-            <ul class= "pagination">
-            {% if page_obj.has_previous%}
-                <li>
-                     <span><a href="?page={{ page_obj.previous_page_number}}">previous</a></span>
-               </li>
-            {% endif %}
-                <li class= "">
-                    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
-                </li>
-            {% if page_obj.has_next %}
-                <li>
-                    <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
-                </li>
-            {% endif %}
-            </ul>
+<h1>{{Pagination}}</h1>
+<h1>Pagination</h1>
+        {% if is_paginated %}
+        <ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li>
+                <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+            </li>
+        {% endif %}
+            <li class="">
+                <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+            </li>
+        {% if page_obj.has_next %}
+            <li>
+                <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+            </li>
+        {% endif %}
+        </ul>
         {% else %}
-          <h3>your file exam</h3>
-         <p>file not yet available</p>
-       {% endif %}   
+            <h3>Your File Exam</h3>
+            <p>File not yet available</p>
+        {% endif %}
+{% endblock %}
 
-   {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -107,28 +107,6 @@ def user_logout(request):
 
     return  HttpResponseRedirect(reverse('app:index'))
 
-@login_required
-def user_profile(request):
-    form=forms.UserProfileForm()
-    if request.method=="POST":
-        form= forms.UserProfileForm(request.POST,request.FILES)
-        if form.is_valid():
-            profile = form.save(commit=False)
-            username = request.session('username') 
-            user = models.User.objects.get(username= username)
-            profile.user = user
-
-            if 'prof_pic' in request.FILES:
-                 profile.prof_pic= request.FILES['prof_pic']
-
-            profile.save()
-
-        else:
-            print(form.errors)
-            return HttpResponse("<h1>invalid forms</h1>")
-    return render(request, 'sam/profile.html', {'form':form})                  
-
-
 class PostCreateView(LoginRequiredMixin,CreateView):
     model = models.Post
     login_url = '/blog/login/'
@@ -142,7 +120,6 @@ class PostCreateView(LoginRequiredMixin,CreateView):
             obj = form.save(commit=False)
             username = self.request.session['username']
             user = models.User.objects.get(username= username)
-            print("###############")
             if obj.author == user:
                 form = forms.PostModelForm(self.request.POST)
 
@@ -169,15 +146,13 @@ class PostListView(ListView):
         return models.Post.objects.filter(published_date__lte =timezone.now()).order_by('-published_date')
         
 class DarftListView(LoginRequiredMixin,ListView):
-      model = models.Post
-      login_url = '/blog/login'
+    model = models.Post
+    login_url = '/blog/login'
   
-      def get_queryset(self):
-         username = self.request.session['username']
-         user = models.User.objects.get(username= username)
-
-         return models.Post.objects.filter(published_date__isnull =  True).order_by('created_date')
-
+    def get_queryset(self):
+        username = self.request.session['username']
+        user = models.User.objects.get(username= username)
+        return models.Post.objects.filter(published_date__isnull =  True).order_by('created_date')
 
 class PostUpdateView(LoginRequiredMixin ,UpdateView):
     model=models.Post
@@ -200,21 +175,17 @@ def post_publish(request,pk):
 
  
 def addcomment(request,pk):
-
-    if request.method == "POST":
+    if request.method == 'POST':
         form = forms.CommentModelForm(request.POST)
         if form.is_valid():
-             obj = form.save(commit=False)
-             post = get_object_or_404(models.Post, pk=pk)
+            comment = form.save(commit=False)
 
-             obj.post = post
-             obj.save()
+            comment.post = get_object_or_404(models.Post, pk=pk)
+            comment.save()
+            return HttpResponseRedirect(reverse('app:post_list'))
 
-             return HttpResponseRedirect(reverse('app:post_detail', kwargs={'pk':pk}))
     else:
         form = forms.CommentModelForm()
-        return render(request, 'blog/comment.html', {'form': form  , 'pk':pk})
-
-     
+        return render(request, 'blog/comment.html', {'form':form, 'pk':pk})
 
   

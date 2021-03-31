@@ -2,10 +2,10 @@
 <style>
     .p {
         border: solid green 2px;
-        border-radius: 5px;
+        border-radius: 9px;
         margin: 80px;
         padding: 50px;
-        background-color: rgb(173, 169, 169);
+        background-color: e6e6e6;
     }
 </style>
 <div class=p>
@@ -26,10 +26,11 @@
     </a>
     <a href="{% url 'app:delete' object.id %}"><h2>delete</h2>
     </a>
+    <a href="{% url 'app:add_comment' object.id %}"><h2>Add comment</h2>
+    </a>
     {% else %}
     <a href="{% url 'app:add_comment' object.id %}"><h2>Add comment</h2>
     </a>
-
      {% endif%}
 
     {% for comment in object.comments.all %}

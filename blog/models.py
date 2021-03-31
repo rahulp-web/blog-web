@@ -5,15 +5,7 @@ from django.urls import reverse
 
 # Create your models here.
 
-class UserProfile(models.Model):
-    User = models.OneToOneField(User, on_delete = models.CASCADE)
 
-    prof_url = models.URLField()
-    prof_pic = models.ImageField(upload_to='profile_pic/')
-
-
-    def __str__(self):
-        return self.user.username
 ###############################################################
 class Post(models.Model):
 
